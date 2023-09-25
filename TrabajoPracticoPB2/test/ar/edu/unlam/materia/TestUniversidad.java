@@ -241,6 +241,100 @@ public class TestUniversidad {
     }
     
     @Test
+    public void queSePuedaEliminarUnaCorrelativa() {
+        Universidad unlam = new Universidad();
+        
+        String nombreCorrelativa = "PB2";
+        Integer idCorrelativa = 234;
+        Materia pb1 = new Materia (nombreCorrelativa, idCorrelativa);
+        
+        unlam.agregarMateria(pb1);
+        
+        String nombreMateria = "PB1";
+        Integer id = 123;
+        Materia pb2 = new Materia (nombreMateria, id);
+        
+        unlam.agregarMateria(pb2);
+        
+        unlam.agregarCorrelativa(id, idCorrelativa);
+        Boolean correlativaEliminada = unlam.eliminarCorrelativa(id, idCorrelativa);
+        
+        assertTrue(correlativaEliminada);
+       
+    }
+    
+    @Test
+    public void queSePuedaInscribirAUnAlumnoAUnaComision() {
+    	Universidad unlam = new Universidad();
+    	
+    	String nombreAlumno = "Martin", apellidoAlumno = "Zaccardo";
+		Integer dni = 123;
+		Alumno alumno = new Alumno(nombreAlumno, apellidoAlumno, dni);
+		
+		unlam.agregarAlumno(alumno);
+		
+		Integer id = 123;
+		CicloLectivo actual = new CicloLectivo(56, LocalDate.parse("2023-03-01"), LocalDate.parse("2023-07-01"), LocalDate.parse("2023-02-01"));
+		Materia materia = new Materia("PB2", 456); 
+		Turno turno = Turno.MAÑANA;
+		Comision comision = new Comision(id, actual, materia, turno);
+		
+		unlam.agregarComision(comision);
+		
+		Boolean alumnoInscriptoAComision = unlam.inscribirAlumnoAComision(dni, id);
+		
+		assertTrue(alumnoInscriptoAComision);
+    }
+    
+    @Test
+    public void queSePuedaAsignarAUnProfesorAUnaComision() {
+    	Universidad unlam = new Universidad();
+    	
+    	String nombreProfe = "Martin", apellidoProfe = "Zaccardo";
+		Integer dni = 123;
+		Profesor profe = new Profesor(nombreProfe, apellidoProfe, dni);
+		
+		unlam.agregarProfesor(profe);
+		
+		Integer id = 123;
+		CicloLectivo actual = new CicloLectivo(56, LocalDate.parse("2023-03-01"), LocalDate.parse("2023-07-01"), LocalDate.parse("2023-02-01"));
+		Materia materia = new Materia("PB2", 456); 
+		Turno turno = Turno.MAÑANA;
+		Comision comision = new Comision(id, actual, materia, turno);
+		
+		unlam.agregarComision(comision);
+		
+		Boolean profesorAsignadoAComision = unlam.asignarProfesorAComision(dni, id);
+		
+		assertTrue(profesorAsignadoAComision);
+    }
+    
+    @Test
+    public void queSePuedaRegistrarUnaNota() {
+    	Universidad unlam = new Universidad();
+    	
+    	String nombreAlumno = "Martin", apellidoAlumno = "Zaccardo";
+		Integer dni = 123;
+		Alumno alumno = new Alumno(nombreAlumno, apellidoAlumno, dni);
+		
+		unlam.agregarAlumno(alumno);
+		
+		Integer id = 123;
+		CicloLectivo actual = new CicloLectivo(56, LocalDate.parse("2023-03-01"), LocalDate.parse("2023-07-01"), LocalDate.parse("2023-02-01"));
+		Materia materia = new Materia("PB2", 456); 
+		Turno turno = Turno.MAÑANA;
+		Comision comision = new Comision(id, actual, materia, turno);
+		
+		unlam.agregarComision(comision);
+		
+		Examen examen = new Examen(alumno, 10.0);
+		
+		Boolean notaRegistrada = unlam.registrarNota(id, dni, examen.getNota());
+		
+		assertTrue(notaRegistrada);
+    }
+    
+    @Test
     public void queSePuedanObtenerLasMateriasFaltantesParaUnAlumno() {
         Universidad unlam = new Universidad();
         
