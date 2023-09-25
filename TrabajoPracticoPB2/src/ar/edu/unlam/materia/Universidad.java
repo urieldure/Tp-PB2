@@ -201,7 +201,41 @@ public class Universidad {
         return null;
     }
     
-    public void pruebaPush() {
-    	
+    public ArrayList<Materia> obtenerMateriasFaltantesParaUnAlumno(Integer dni) {
+        Alumno alumno = buscarAlumno(dni);
+        ArrayList<Materia> materiasFaltantes = new ArrayList<>(materias); // Inicialmente, asumimos que el alumno no ha cursado ninguna materia
+
+        if (alumno != null) {
+            for (Comision comision : comisiones) {
+                if (comision.getAlumnos().contains(alumno)) {
+                    // Aquí deberías verificar si el alumno aprobó la materia en esta comisión
+                    // if (comision.alumnoAprobo(alumno)) {
+                    //     materiasFaltantes.remove(comision.getMateria());
+                    // }
+                }
+            }
+        }
+        return materiasFaltantes;
+    }
+
+    public Double calcularPromedio(Integer dni) {
+        Alumno alumno = buscarAlumno(dni);
+        Double sumaNotas = 0.0;
+        Integer cantidadNotas = 0;
+
+        if (alumno != null) {
+            for (Comision comision : comisiones) {
+                if (comision.getAlumnos().contains(alumno)) {
+                    for (Examen examen : comision.getExamenes()) {
+                        if (examen.getAlumno().equals(alumno)) {
+                            sumaNotas += examen.getNota();
+                            cantidadNotas++;
+                        }
+                    }
+                }
+            }
+        }
+
+        return cantidadNotas > 0 ? sumaNotas / cantidadNotas : null; // Si el alumno tiene notas, calculamos el promedio. Si no, devolvemos null.
     }
 }
