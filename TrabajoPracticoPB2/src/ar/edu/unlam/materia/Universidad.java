@@ -125,34 +125,4 @@ public class Universidad {
 		return false;
 
 	}
-	
-    public Boolean eliminarCorrelativa(Integer idMateria, Integer idCorrelativa) {
-        Materia materia = buscarMateria(idMateria);
-        Materia correlativa = buscarMateria(idCorrelativa);
-
-        if (materia != null && correlativa != null && materia.getCorrelativas().contains(correlativa)) {
-            return materia.getCorrelativas().remove(correlativa);
-        }
-        return false;
-    }
-
-    public Boolean inscribirAlumnoAComision(Integer dni, Integer idComision) {
-        Alumno alumno = buscarAlumno(dni);
-        Comision comision = buscarComision(idComision);
-
-        if (alumno != null && comision != null && !comision.getAlumnos().contains(alumno)) {
-            return comision.getAlumnos().add(alumno);
-        }
-        return false;
-    }
-
-    public Boolean asignarProfesorAComision(Integer dni, Integer idComision) {
-        Profesor profesor = buscarProfesor(dni);
-        Comision comision = buscarComision(idComision);
-
-        if (profesor != null && comision != null && !comision.getProfesores().contains(profesor)) {
-            return comision.getProfesores().add(profesor);
-        }
-        return false;
-    }
 }
