@@ -48,7 +48,7 @@ public class Universidad {
 			}
 		}
 		return null;
-    }
+	}
 
 	public Boolean agregarCicloLectivo(CicloLectivo actual) {
 		if (buscarCicloLectivo(actual.getId()) == null) {
@@ -56,17 +56,16 @@ public class Universidad {
 		}
 		return false;
 	}
-	
+
 	public Boolean ciclosSuperpuestos(CicloLectivo primero, CicloLectivo segundo) {
-		
-		if(segundo.getFechaDeInicio().isAfter(primero.getFechaDeInicio()) && 
-				segundo.getFechaDeInicio().isBefore(primero.getFechaDeFinalizacion())) {
+
+		if (segundo.getFechaDeInicio().isAfter(primero.getFechaDeInicio())
+				&& segundo.getFechaDeInicio().isBefore(primero.getFechaDeFinalizacion())) {
 			return true;
 		}
-		
+
 		return false;
 	}
-	
 
 	public CicloLectivo buscarCicloLectivo(Integer id) {
 
@@ -83,12 +82,13 @@ public class Universidad {
 			return comisiones.add(comision);
 		}
 		return false;
-		
+
 	}
 
 	public Comision buscarComision(Materia materia, CicloLectivo ciclo, Turno turno) {
 		for (int i = 0; i < comisiones.size(); i++) {
-			if (this.comisiones.get(i).getMateria().equals(materia) && this.comisiones.get(i).getCicloLectivo().equals(ciclo)
+			if (this.comisiones.get(i).getMateria().equals(materia)
+					&& this.comisiones.get(i).getCicloLectivo().equals(ciclo)
 					&& this.comisiones.get(i).getTurno().equals(turno)) {
 				return this.comisiones.get(i);
 			}
@@ -98,10 +98,11 @@ public class Universidad {
 
 	public Boolean agregarProfesor(Profesor profe) {
 		if (buscarProfesor(profe.getDni()) == null) {
+
 			return profesores.add(profe);
 		}
+
 		return false;
-		
 	}
 
 	public Profesor buscarProfesor(Integer dni) {
@@ -112,14 +113,21 @@ public class Universidad {
 		}
 		return null;
 	}
-	
-    public Boolean agregarCorrelativa(Integer idMateria, Integer idCorrelativa) {
-        Materia materia = buscarMateria(idMateria);
-        Materia correlativa = buscarMateria(idCorrelativa);
 
-        if (materia != null && correlativa != null) {
-            return materia.asignarCorrelativa(correlativa);
-        }
-        return false;
+	public Boolean agregarCorrelativa(Integer idMateria, Integer idCorrelativa) {
+		Materia materia = buscarMateria(idMateria);
+		Materia correlativa = buscarMateria(idCorrelativa);
+
+		if (materia != null && correlativa != null) {
+			return materia.asignarCorrelativa(correlativa);
+		}
+
+		return false; // so pelot?
+
+	}
+	
+	  
+    public void pruebaGit() {
+    	
     }
 }
