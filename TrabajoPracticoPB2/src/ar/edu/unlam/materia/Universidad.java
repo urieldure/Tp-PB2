@@ -78,11 +78,16 @@ public class Universidad {
 	}
 
 	public Boolean agregarComision(Comision comision) {
-	    if (buscarComision(comision.getId()) == null) {
-	        return comisiones.add(comision);
+	    for (Comision com : comisiones) {
+	        if (com.getMateria().equals(comision.getMateria()) &&
+	            com.getCicloLectivo().equals(comision.getCicloLectivo()) &&
+	            com.getTurno().equals(comision.getTurno())) {
+	            return false; // Si ya existe una comisión con la misma materia, ciclo lectivo y turno, devolvemos false
+	        }
 	    }
-	    return false;
+	    return comisiones.add(comision); // Si no existe, agregamos la comisión
 	}
+
 
 
 	public Comision buscarComision(Integer idComision) {
@@ -152,5 +157,49 @@ public class Universidad {
             return comision.getProfesores().add(profesor);
         }
         return false;
+    }
+    
+    public Boolean registrarNota(Integer idComision, Integer dni, Double nota) {
+        Comision comision = buscarComision(idComision);
+        Alumno alumno = buscarAlumno(dni);
+
+        if (comision != null && alumno != null && comision.getAlumnos().contains(alumno)) {
+            Examen examen = new Examen(alumno, nota);
+            return comision.getExamenes().add(examen);
+        }
+        return false;
+    }
+
+
+    public ArrayList<Materia> obtenerMateriasAprobadasParaUnAlumno(Integer dni) {
+        Alumno alumno = buscarAlumno(dni);
+        ArrayList<Materia> materiasAprobadas = new ArrayList<>();
+
+        if (alumno != null) {
+            for (Comision comision : comisiones) {
+                if (comision.getAlumnos().contains(alumno)) {
+                    // Aquí deberías verificar si el alumno aprobó la materia en esta comisión
+                    // if (comision.alumnoAprobo(alumno)) {
+                    //     materiasAprobadas.add(comision.getMateria());
+                    // }
+                }
+            }
+        }
+        return materiasAprobadas;
+    }
+
+    public Double obtenerNota(Integer dni, Integer idMateria) {
+        Alumno alumno = buscarAlumno(dni);
+        Materia materia = buscarMateria(idMateria);
+
+        if (alumno != null && materia != null) {
+            for (Comision comision : comisiones) {
+                if (comision.getAlumnos().contains(alumno) && comision.getMateria().equals(materia)) {
+                    // Aquí deberías retornar la nota del alumno en esta comisión
+                    // return comision.obtenerNota(alumno);
+                }
+            }
+        }
+        return null;
     }
 }

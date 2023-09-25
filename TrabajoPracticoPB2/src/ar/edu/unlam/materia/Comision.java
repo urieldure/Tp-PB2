@@ -10,15 +10,16 @@ public class Comision {
 	private CicloLectivo cicloLectivo;
 	private Materia materia;
 	private Turno turno;
-	
 	public Comision (Integer id, CicloLectivo cicloLectivo, Materia materia, Turno turno) {
-		this.id = id;
-		this.cicloLectivo = cicloLectivo;
-		this.materia = materia;
-		this.turno = turno;
-		alumnos = new ArrayList<>();
-		profesores = new ArrayList<>();
+	    this.id = id;
+	    this.cicloLectivo = cicloLectivo;
+	    this.materia = materia;
+	    this.turno = turno;
+	    alumnos = new ArrayList<>();
+	    profesores = new ArrayList<>();
+	    new ArrayList<>();
 	}
+
 	
 	public Integer getId() {
 		return id;
@@ -74,4 +75,12 @@ public class Comision {
         }
         return false; // Si el profesor ya está asignado a la comisión, devolvemos false
     }
+    
+    public ArrayList<Examen> getExamenes() {
+        return getExamenes(); // Getter para la lista de exámenes
+    }
+
+    public void setExamenes(ArrayList<Examen> examenes) {
+    }
+
 }
