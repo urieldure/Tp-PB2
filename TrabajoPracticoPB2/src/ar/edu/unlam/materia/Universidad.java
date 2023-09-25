@@ -78,23 +78,22 @@ public class Universidad {
 	}
 
 	public Boolean agregarComision(Comision comision) {
-		if (buscarComision(comision.getMateria(), comision.getCicloLectivo(), comision.getTurno()) == null) {
-			return comisiones.add(comision);
-		}
-		return false;
-
+	    if (buscarComision(comision.getId()) == null) {
+	        return comisiones.add(comision);
+	    }
+	    return false;
 	}
 
-	public Comision buscarComision(Materia materia, CicloLectivo ciclo, Turno turno) {
-		for (int i = 0; i < comisiones.size(); i++) {
-			if (this.comisiones.get(i).getMateria().equals(materia)
-					&& this.comisiones.get(i).getCicloLectivo().equals(ciclo)
-					&& this.comisiones.get(i).getTurno().equals(turno)) {
-				return this.comisiones.get(i);
-			}
-		}
-		return null;
+
+	public Comision buscarComision(Integer idComision) {
+	    for (Comision comision : comisiones) {
+	        if (comision.getId().equals(idComision)) {
+	            return comision;
+	        }
+	    }
+	    return null;
 	}
+
 
 	public Boolean agregarProfesor(Profesor profe) {
 		if (buscarProfesor(profe.getDni()) == null) {
@@ -125,4 +124,33 @@ public class Universidad {
 		return false;
 
 	}
+    public Boolean eliminarCorrelativa(Integer idMateria, Integer idCorrelativa) {
+        Materia materia = buscarMateria(idMateria);
+        Materia correlativa = buscarMateria(idCorrelativa);
+
+        if (materia != null && correlativa != null && materia.getCorrelativas().contains(correlativa)) {
+            return materia.getCorrelativas().remove(correlativa);
+        }
+        return false;
+    }
+
+    public Boolean inscribirAlumnoAComision(Integer dni, Integer idComision) {
+        Alumno alumno = buscarAlumno(dni);
+        Comision comision = buscarComision(idComision);
+
+        if (alumno != null && comision != null && !comision.getAlumnos().contains(alumno)) {
+            return comision.getAlumnos().add(alumno);
+        }
+        return false;
+    }
+
+    public Boolean asignarProfesorAComision(Integer dni, Integer idComision) {
+        Profesor profesor = buscarProfesor(dni);
+        Comision comision = buscarComision(idComision);
+
+        if (profesor != null && comision != null && !comision.getProfesores().contains(profesor)) {
+            return comision.getProfesores().add(profesor);
+        }
+        return false;
+    }
 }
