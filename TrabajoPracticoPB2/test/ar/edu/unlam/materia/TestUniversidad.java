@@ -3,8 +3,6 @@ package ar.edu.unlam.materia;
 import static org.junit.Assert.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-
 import org.junit.Test;
 
 public class TestUniversidad {
@@ -220,30 +218,27 @@ public class TestUniversidad {
 		assertTrue(profeAsignadoAComision);
 	}
 	
-	@Test
-	public void queSePuedaAgregarUnaCorrelativaAUnaMateria() {
-		Universidad unlam = new Universidad();
-		
-		String nombreCorrelativa = "PB1";
-		Integer idCorrelativa = 123;
-		Materia pb1 = new Materia (nombreCorrelativa, idCorrelativa);
-		
-		unlam.agregarMateria(pb1);
-		
-		String nombreMateria = "PB2";
-	    Integer id = 234;
-	    Materia pb2 = new Materia (nombreMateria, id);
-	    
-	    unlam.agregarMateria(pb2);
-	    
-	    Boolean correlativaAgregada = unlam.agregarCorrelativa(id, idCorrelativa);
-	    
-	    assertTrue(correlativaAgregada);
-	   
-		}
-		
-	}
-
-
-	
+    @Test
+    public void queSePuedaAgregarUnaCorrelativaAUnaMateria() {
+        Universidad unlam = new Universidad();
+        
+        String nombreCorrelativa = "PB1";
+        Integer idCorrelativa = 123;
+        Materia pb1 = new Materia (nombreCorrelativa, idCorrelativa);
+        
+        unlam.agregarMateria(pb1);
+        
+        String nombreMateria = "PB2";
+        Integer id = 234;
+        Materia pb2 = new Materia (nombreMateria, id);
+        
+        unlam.agregarMateria(pb2);
+        
+        Boolean correlativaAgregada = unlam.agregarCorrelativa(id, idCorrelativa);
+        
+        assertTrue(correlativaAgregada);
+       
+    }
+    
+}
 

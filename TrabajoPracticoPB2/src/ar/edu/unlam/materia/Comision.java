@@ -26,66 +26,52 @@ public class Comision {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
+    }
 
-	public ArrayList<Alumno> getAlumnos() {
-		return alumnos;
-	}
+    public ArrayList<Alumno> getAlumnos() {
+        return alumnos; 
+    }
 
-	public void setAlumnos(ArrayList<Alumno> alumnos) {
-		this.alumnos = alumnos;
-	}
+    public void setAlumnos(ArrayList<Alumno> alumnos) {
+        this.alumnos = alumnos; 
+    }
 
-	public ArrayList<Profesor> getProfesores() {
-		return profesores;
-	}
+    public ArrayList<Profesor> getProfesores() {
+        return profesores; 
+    }
 
-	public void setProfesores(ArrayList<Profesor> profesores) {
-		this.profesores = profesores;
-	}
+    public void setProfesores(ArrayList<Profesor> profesores) {
+        this.profesores = profesores; 
+    }
 
-	public CicloLectivo getCicloLectivo() {
-		return cicloLectivo;
-	}
+    public CicloLectivo getCicloLectivo() {
+        return cicloLectivo; 
+    }
 
-	public void setCicloLectivo(CicloLectivo cicloLectivo) {
-		this.cicloLectivo = cicloLectivo;
-	}
+    public void setCicloLectivo(CicloLectivo cicloLectivo) {
+        this.cicloLectivo = cicloLectivo; 
+    }
 
-	public Materia getMateria() {
-		return materia;
-	}
+    public Materia getMateria() {
+        return materia; 
+    }
 
-	public void setMateria(Materia materia) {
-		this.materia = materia;
-	}
+    public void setMateria(Materia materia) {
+        this.materia = materia; 
+    }
 
-	public Turno getTurno() {
-		return turno;
-	}
+    public Turno getTurno() {
+        return turno; 
+    }
 
-	public void setTurno(Turno turno) {
-		this.turno = turno;
-	}
-
-	public Boolean asignarProfesor(Profesor profe) {
-		if (buscarProfesor(profe.getDni()) == null) {
-				return profesores.add(profe);
-			}
-			return false;
-			
-		}
-	
-	
-	private Profesor buscarProfesor(Integer dni) {
-		for (int i = 0; i < profesores.size(); i++) {
-			if (this.profesores.get(i).getDni().equals(dni)) {
-				return this.profesores.get(i);
-			}
-		}
-		return null;
-	}
-	
-	
-	
+    public void setTurno(Turno turno) {
+        this.turno = turno; 
+    }
+    
+    public Boolean asignarProfesor(Profesor profe) {
+        if (!this.profesores.contains(profe)) { // Verificamos que el profesor no esté ya asignado a la comisión
+            return this.profesores.add(profe);
+        }
+        return false; // Si el profesor ya está asignado a la comisión, devolvemos false
+    }
 }

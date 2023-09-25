@@ -48,8 +48,8 @@ public class CicloLectivo {
 		this.fechaDeInscripcion = fechaDeInscripcion;
 	}
 	
-	
-
-	
-
+	public boolean estaEnCurso() {
+        LocalDate hoy = LocalDate.now();
+        return (hoy.isAfter(this.fechaDeInicio) || hoy.isEqual(this.fechaDeInicio)) && (hoy.isBefore(this.fechaDeFinalizacion) || hoy.isEqual(this.fechaDeFinalizacion));
+    }
 }

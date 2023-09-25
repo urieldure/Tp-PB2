@@ -55,18 +55,13 @@ public class Profesor {
 
 	public void setFechaDeNacimiento(LocalDate fechaDeNacimiento) {
 		this.fechaDeNacimiento = fechaDeNacimiento;
-	}
+    }
 
-	public LocalDate getFechaDeIngreso() {
-		return fechaDeIngreso;
-	}
+    public LocalDate getFechaDeIngreso() {
+        return fechaDeIngreso; 
+    }
 
-	public void setFechaDeIngreso(LocalDate fechaDeIngreso) {
-		this.fechaDeIngreso = fechaDeIngreso;
-	}
-	
-	
-	
-	
-
+    public void setFechaDeIngreso(LocalDate fechaDeIngreso) {
+        this.fechaDeIngreso = fechaDeIngreso; 
+    }
 }

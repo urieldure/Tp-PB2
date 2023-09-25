@@ -1,6 +1,7 @@
 package ar.edu.unlam.materia;
 
 import java.time.LocalDate;
+import java.time.Period;
 
 public class Alumno {
 
@@ -64,6 +65,7 @@ public class Alumno {
 		this.fechaDeIngreso = fechaDeIngreso;
 	}
 	
-	
-	
+	public int getEdad() {
+        return Period.between(this.fechaDeNacimiento, LocalDate.now()).getYears();
+    }
 }

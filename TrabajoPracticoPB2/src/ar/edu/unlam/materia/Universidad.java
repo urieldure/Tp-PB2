@@ -19,7 +19,6 @@ public class Universidad {
 	}
 
 	public Boolean agregarMateria(Materia materia) {
-
 		if (buscarMateria(materia.getId()) == null) {
 			return materias.add(materia);
 		}
@@ -27,13 +26,11 @@ public class Universidad {
 	}
 
 	public Materia buscarMateria(Integer id) {
-
 		for (int i = 0; i < this.materias.size(); i++) {
 			if (this.materias.get(i).getId().equals(id)) {
 				return this.materias.get(i);
 			}
 		}
-
 		return null;
 	}
 
@@ -45,14 +42,13 @@ public class Universidad {
 	}
 
 	public Alumno buscarAlumno(Integer dni) {
-
 		for (int i = 0; i < alumnos.size(); i++) {
 			if (this.alumnos.get(i).getDni().equals(dni)) {
 				return this.alumnos.get(i);
 			}
 		}
 		return null;
-	}
+    }
 
 	public Boolean agregarCicloLectivo(CicloLectivo actual) {
 		if (buscarCicloLectivo(actual.getId()) == null) {
@@ -117,15 +113,13 @@ public class Universidad {
 		return null;
 	}
 	
-	public Boolean agregarCorrelativa(Integer idMateria, Integer idCorrelativa) {
-		
-		if (buscarMateria(idMateria) != null && buscarMateria(idCorrelativa) != null) {
-			return buscarMateria(idMateria).asignarCorrelativa(idCorrelativa);
-		}
-		
-		return false;
-	
-	}
+    public Boolean agregarCorrelativa(Integer idMateria, Integer idCorrelativa) {
+        Materia materia = buscarMateria(idMateria);
+        Materia correlativa = buscarMateria(idCorrelativa);
 
-	
+        if (materia != null && correlativa != null) {
+            return materia.asignarCorrelativa(correlativa);
+        }
+        return false;
+    }
 }
