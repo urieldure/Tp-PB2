@@ -88,8 +88,6 @@ public class Universidad {
 	    return comisiones.add(comision); // Si no existe, agregamos la comisión
 	}
 
-
-
 	public Comision buscarComision(Integer idComision) {
 	    for (Comision comision : comisiones) {
 	        if (comision.getId().equals(idComision)) {

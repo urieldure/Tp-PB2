@@ -222,14 +222,14 @@ public class TestUniversidad {
     public void queSePuedaAgregarUnaCorrelativaAUnaMateria() {
         Universidad unlam = new Universidad();
         
-        String nombreCorrelativa = "PB1";
-        Integer idCorrelativa = 123;
+        String nombreCorrelativa = "PB2";
+        Integer idCorrelativa = 234;
         Materia pb1 = new Materia (nombreCorrelativa, idCorrelativa);
         
         unlam.agregarMateria(pb1);
         
-        String nombreMateria = "PB2";
-        Integer id = 234;
+        String nombreMateria = "PB1";
+        Integer id = 123;
         Materia pb2 = new Materia (nombreMateria, id);
         
         unlam.agregarMateria(pb2);
@@ -239,6 +239,30 @@ public class TestUniversidad {
         assertTrue(correlativaAgregada);
        
     }
+    
+    @Test
+    public void queSePuedanObtenerLasMateriasFaltantesParaUnAlumno() {
+        Universidad unlam = new Universidad();
+        
+        // Aquí deberías agregar algunas materias, alumnos y comisiones a la universidad
+
+        ArrayList<Materia> materiasFaltantes = unlam.obtenerMateriasFaltantesParaUnAlumno(dni);
+
+        // Aquí deberías verificar que la lista de materias faltantes es correcta
+    }
+
+    @Test
+    public void queSePuedaCalcularElPromedioDeUnAlumno() {
+        Universidad unlam = new Universidad();
+        
+        // Aquí deberías agregar algunas materias, alumnos y comisiones a la universidad
+        // También deberías registrar algunas notas para el alumno
+
+        Double promedio = unlam.calcularPromedio(dni);
+
+        // Aquí deberías verificar que el promedio calculado es correcto
+    }
+
     
 }
 
