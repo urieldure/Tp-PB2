@@ -3,8 +3,6 @@ package ar.edu.unlam.materia;
 import static org.junit.Assert.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-
 import org.junit.Test;
 
 public class TestUniversidad {
