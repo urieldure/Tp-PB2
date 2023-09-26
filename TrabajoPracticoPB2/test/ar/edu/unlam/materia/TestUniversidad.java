@@ -448,18 +448,28 @@ public class TestUniversidad {
     @Test
     public void queSePuedanObtenerLasMateriasFaltantesParaUnAlumno() {
         Universidad unlam = new Universidad();
-        
+
+        Materia pb1 = new Materia("PB1", 456);
+        Materia pb2 = new Materia("PB2", 457);
+        unlam.agregarMateria(pb1);
+        unlam.agregarMateria(pb2);
+
         Integer dni = 123;
         Alumno alumno = new Alumno("Martin", "Zaccardo", dni);
         unlam.agregarAlumno(alumno);
 
-        Materia pb1 = new Materia("PB1", 456);
-        unlam.agregarMateria(pb1);
+        CicloLectivo actual = new CicloLectivo(56, LocalDate.parse("2023-03-01"), LocalDate.parse("2023-07-01"), LocalDate.parse("2023-02-01"));
+        Comision comision = new Comision(123, actual, pb1, Turno.MAÑANA);
+        unlam.agregarComision(comision);
+        unlam.inscribirAlumnoAComision(dni, 123);
+        unlam.registrarNota(123, dni, 10.0);
 
-        ArrayList<Materia> materiasFaltantes = unlam.obtenerMateriasFaltantesParaUnAlumno(dni);
+        ArrayList<Materia> materiasFaltantes = unlam.obtenerMateriasQueFaltanCursar(dni);
 
-        assertTrue(materiasFaltantes.contains(pb1));
+        assertTrue(materiasFaltantes.contains(pb2));
+        assertFalse(materiasFaltantes.contains(pb1));
     }
+
 
     @Test
     public void queSePuedaCalcularElPromedioDeUnAlumno() {
@@ -592,7 +602,7 @@ public class TestUniversidad {
         Boolean alumnoAprobo = comision.alumnoAprobo(alumno);
 
        assertTrue(alumnoAprobo);
-    }
+    }    
 
 }
 

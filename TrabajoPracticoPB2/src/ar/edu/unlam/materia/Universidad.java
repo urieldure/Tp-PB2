@@ -213,8 +213,7 @@ public class Universidad {
 
 	    if (alumno != null && materia != null) {
 	        for (Comision comision : comisiones) {
-	            if (comision.getAlumnos().contains(alumno) && comision.getMateria().equals(materia)) {
-	                // Aquí deberías retornar la nota del alumno en esta comisión
+	            if (comision.getAlumnos().contains(alumno) && comision.getMateria().equals(materia)) {	               
 	                return comision.obtenerNota(alumno);
 	            }
 	        }
@@ -273,5 +272,21 @@ public class Universidad {
 	    }
 	    return false;
 	}
+	
+	public ArrayList<Materia> obtenerMateriasQueFaltanCursar(Integer idAlumno) {
+	    Alumno alumno = buscarAlumno(idAlumno);
+	    ArrayList<Materia> materiasFaltantes = new ArrayList<>(materias);  // Copia todas las materias
+
+	    if (alumno != null) {
+	        for (Comision comision : comisiones) {
+	            if (comision.getAlumnos().contains(alumno) && comision.estaAprobado(alumno)) {
+	                materiasFaltantes.remove(comision.getMateria());
+	            }
+	        }
+	    }
+
+	    return materiasFaltantes;
+	}
+
 
 }

@@ -113,6 +113,15 @@ public class Comision {
 		}
 		return false;
 	}
+	
+	public boolean estaAprobado(Alumno alumno) {
+	    for (Examen examen : examenes) {
+	        if (examen.getAlumno().equals(alumno) && examen.getNota() >= 4.0) {
+	            return true;
+	        }
+	    }
+	    return false;
+	}
 
 
 }
