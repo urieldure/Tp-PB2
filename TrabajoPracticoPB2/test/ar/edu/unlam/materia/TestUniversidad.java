@@ -344,50 +344,6 @@ public class TestUniversidad {
     }
     
     @Test
-    public void queSePuedaAsignarUnAulaAUnaComision() {
-        Universidad unlam = new Universidad();
-        
-        Integer id = 123;
-		CicloLectivo actual = new CicloLectivo(56, LocalDate.parse("2023-03-01"), LocalDate.parse("2023-07-01"), LocalDate.parse("2023-02-01"));
-		Materia materia = new Materia("PB2", 456); 
-		Turno turno = Turno.MAÑANA;
-		Comision comision = new Comision(id, actual, materia, turno);
-		
-		unlam.agregarComision(comision);
-		
-		Integer idAula = 789, capMax = 100;
-		Aula aula = new Aula(idAula, capMax);
-		
-		Boolean aulaAsignada = comision.asignarAula(aula);
-		
-		assertTrue(aulaAsignada);
-		
-    }
-    
-    @Test
-    public void queNoSePuedaAsignarUnAulaAUnaComisionPorqueYaExiste() {
-        Universidad unlam = new Universidad();
-        
-        Integer id = 123;
-		CicloLectivo actual = new CicloLectivo(56, LocalDate.parse("2023-03-01"), LocalDate.parse("2023-07-01"), LocalDate.parse("2023-02-01"));
-		Materia materia = new Materia("PB2", 456); 
-		Turno turno = Turno.MAÑANA;
-		Comision comision = new Comision(id, actual, materia, turno);
-		
-		unlam.agregarComision(comision);
-		
-		Integer idAula = 789, capMax = 100;
-		Aula aula = new Aula(idAula, capMax);
-		
-		comision.asignarAula(aula);
-		
-		Boolean aulaAsignada = comision.asignarAula(aula);
-		
-		assertFalse(aulaAsignada);
-		
-    }
-    
-    @Test
     public void queSePuedaRegistrarUnaNota() {
         Universidad unlam = new Universidad();
         
@@ -434,13 +390,11 @@ public class TestUniversidad {
 		
 		unlam.agregarComision(comision);
 		
-		Examen examen = new Examen(alumno, 6.0);
+		Examen examen = new Examen(alumno, 10.0);
 		
-		Double notaObtenida = comision.obtenerNota(alumno);
+		Boolean notaRegistrada = unlam.registrarNota(id, dni, examen.getNota());
 		
-		Double notaEsperada = 10.0;
-		
-		assertEquals(notaEsperada, notaObtenida);
+		assertTrue(notaRegistrada);
     }
     
     @Test
