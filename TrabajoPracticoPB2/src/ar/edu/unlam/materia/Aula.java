@@ -6,12 +6,12 @@ public class Aula {
 	
 	private Integer id;
 	private Integer capacidadMaxima;
-	private ArrayList<Alumno> alumnosEnAula; // Para llevar un registro de los alumnos en el aula
+	private ArrayList<Alumno> alumnosEnAula;
 	
 	public Aula(Integer id, Integer capacidadMaxima) {
 		this.id = id;
 		this.capacidadMaxima = capacidadMaxima;
-        this.alumnosEnAula = new ArrayList<>(); // Inicializamos la lista de alumnos en el aula
+        this.alumnosEnAula = new ArrayList<>();
     }
 
 	public Integer getId() {
@@ -23,11 +23,11 @@ public class Aula {
     }
 
     public ArrayList<Alumno> getAlumnosEnAula() {
-        return alumnosEnAula; // Getter para la lista de alumnos en el aula
+        return alumnosEnAula; 
     }
 
     public void setAlumnosEnAula(ArrayList<Alumno> alumnosEnAula) {
-        this.alumnosEnAula = alumnosEnAula; // Setter para la lista de alumnos en el aula
+        this.alumnosEnAula = alumnosEnAula; 
     }
 
     public Integer getCapacidadRestante() {

@@ -9,7 +9,6 @@ public class Examen {
         this.nota = nota;
     }
 
-    // Aquí podrías agregar getters y setters para los campos 'alumno' y 'nota'
     public Alumno getAlumno() {
         return alumno;
     }
