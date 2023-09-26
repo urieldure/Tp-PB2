@@ -381,13 +381,16 @@ public class TestUniversidad {
 
         // También deberías registrar algunas notas para el alumno
         Examen examen = new Examen(alumno, 10.0);
-        comision.getExamenes().add(examen);
+        comision.getExamenes().add(examen); // Agregas el examen a la comisión
+
+        Boolean notaRegistrada = unlam.registrarNota(123, dni, 10.0); // Registra la nota en la universidad
 
         Double promedio = unlam.calcularPromedio(dni);
 
         // Aquí deberías verificar que el promedio calculado es correcto
         assertEquals(10.0, promedio, 0.01);
     }
+
 
     @Test
     public void queSePuedaObtenerLosExamenesDeUnaComision() {
