@@ -463,8 +463,9 @@ public class TestUniversidad {
 
     @Test
     public void queSePuedaCalcularElPromedioDeUnAlumno() {
-        Universidad unlam = new Universidad();
-        
+
+    	Universidad unlam = new Universidad();
+
         Integer dni = 123;
         Alumno alumno = new Alumno("Martin", "Zaccardo", dni);
         unlam.agregarAlumno(alumno);
@@ -478,15 +479,16 @@ public class TestUniversidad {
         Comision comision = new Comision(123, actual, pb1, Turno.MAÑANA);
         unlam.agregarComision(comision);
 
-        Examen examen = new Examen(alumno, 10.0);
-        comision.getExamenes().add(examen); 
+        unlam.inscribirAlumnoAComision(dni, 123);
 
-        unlam.registrarNota(123, dni, 10.0);
+        Double notaEsperada = 10.0;
+        unlam.registrarNota(123, dni, notaEsperada);
 
         Double promedio = unlam.calcularPromedio(dni);
 
-        assertEquals(10.0, promedio, 0.01);
+        assertEquals(notaEsperada, promedio, 0.01);
     }
+
 
     @Test
     public void queSePuedaObtenerLosExamenesDeUnaComision() {
