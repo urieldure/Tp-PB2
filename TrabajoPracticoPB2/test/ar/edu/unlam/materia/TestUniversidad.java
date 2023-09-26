@@ -3,6 +3,8 @@ package ar.edu.unlam.materia;
 import static org.junit.Assert.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+
 import org.junit.Test;
 
 public class TestUniversidad {
@@ -311,38 +313,51 @@ public class TestUniversidad {
     
     @Test
     public void queSePuedaRegistrarUnaNota() {
-    	Universidad unlam = new Universidad();
-    	
-    	String nombreAlumno = "Martin", apellidoAlumno = "Zaccardo";
-		Integer dni = 123;
-		Alumno alumno = new Alumno(nombreAlumno, apellidoAlumno, dni);
-		
-		unlam.agregarAlumno(alumno);
-		
-		Integer id = 123;
-		CicloLectivo actual = new CicloLectivo(56, LocalDate.parse("2023-03-01"), LocalDate.parse("2023-07-01"), LocalDate.parse("2023-02-01"));
-		Materia materia = new Materia("PB2", 456); 
-		Turno turno = Turno.MAÑANA;
-		Comision comision = new Comision(id, actual, materia, turno);
-		
-		unlam.agregarComision(comision);
-		
-		Examen examen = new Examen(alumno, 10.0);
-		
-		Boolean notaRegistrada = unlam.registrarNota(id, dni, examen.getNota());
-		
-		assertTrue(notaRegistrada);
+        Universidad unlam = new Universidad();
+        
+        String nombreAlumno = "Martin", apellidoAlumno = "Zaccardo";
+        Integer dni = 123;
+        Alumno alumno = new Alumno(nombreAlumno, apellidoAlumno, dni);
+        
+        unlam.agregarAlumno(alumno);
+        
+        Integer id = 123;
+        CicloLectivo actual = new CicloLectivo(56, LocalDate.parse("2023-03-01"), LocalDate.parse("2023-07-01"), LocalDate.parse("2023-02-01"));
+        Materia materia = new Materia("PB2", 456); 
+        Turno turno = Turno.MAÑANA;
+        Comision comision = new Comision(id, actual, materia, turno);
+        
+        unlam.agregarComision(comision);
+
+        // Aquí inscribes al alumno en la comisión
+        unlam.inscribirAlumnoAComision(dni, id);
+        
+        Examen examen = new Examen(alumno, 10.0);
+        
+        Boolean notaRegistrada = unlam.registrarNota(id, dni, examen.getNota());
+        
+        assertTrue(notaRegistrada);
     }
+
     
     @Test
     public void queSePuedanObtenerLasMateriasFaltantesParaUnAlumno() {
         Universidad unlam = new Universidad();
         
         // Aquí deberías agregar algunas materias, alumnos y comisiones a la universidad
+        Integer dni = 123;
+        Alumno alumno = new Alumno("Martin", "Zaccardo", dni);
+        unlam.agregarAlumno(alumno);
+
+        Materia pb1 = new Materia("PB1", 456);
+        unlam.agregarMateria(pb1);
+
+        // Aquí deberías inscribir al alumno en algunas comisiones y registrar algunas notas para el alumno
 
         ArrayList<Materia> materiasFaltantes = unlam.obtenerMateriasFaltantesParaUnAlumno(dni);
 
         // Aquí deberías verificar que la lista de materias faltantes es correcta
+        assertTrue(materiasFaltantes.contains(pb1));
     }
 
     @Test
@@ -350,13 +365,73 @@ public class TestUniversidad {
         Universidad unlam = new Universidad();
         
         // Aquí deberías agregar algunas materias, alumnos y comisiones a la universidad
+        Integer dni = 123;
+        Alumno alumno = new Alumno("Martin", "Zaccardo", dni);
+        unlam.agregarAlumno(alumno);
+
+        Materia pb1 = new Materia("PB1", 456);
+        unlam.agregarMateria(pb1);
+
+        // Creas una instancia de CicloLectivo y la asignas a la variable actual
+        CicloLectivo actual = new CicloLectivo(56, LocalDate.parse("2023-03-01"), LocalDate.parse("2023-07-01"), LocalDate.parse("2023-02-01"));
+        unlam.agregarCicloLectivo(actual);
+
+        Comision comision = new Comision(123, actual, pb1, Turno.MAÑANA);
+        unlam.agregarComision(comision);
+
         // También deberías registrar algunas notas para el alumno
+        Examen examen = new Examen(alumno, 10.0);
+        comision.getExamenes().add(examen);
 
         Double promedio = unlam.calcularPromedio(dni);
 
         // Aquí deberías verificar que el promedio calculado es correcto
+        assertEquals(10.0, promedio, 0.01);
     }
 
-    
+    @Test
+    public void queSePuedaObtenerLosExamenesDeUnaComision() {
+        // Aquí deberías agregar una comisión a la universidad y registrar algunos exámenes en esa comisión
+
+        ArrayList<Examen> examenes = Comision.getExamenes();
+
+        // Aquí deberías verificar que la lista de exámenes obtenida es correcta
+    }
+
+    @Test
+    public void queSePuedaAsignarLosExamenesAUnaComision() {
+        // Aquí deberías agregar una comisión a la universidad
+
+        ArrayList<Examen> examenes = new ArrayList<>(); // Creas una lista de exámenes
+
+        Comision.setExamenes(examenes); // Asignas la lista de exámenes a la comisión
+
+        // Aquí deberías verificar que la lista de exámenes de la comisión es la que acabas de asignar
+    }
+
+    @Test
+    public void queSePuedaObtenerLaNotaDeUnAlumnoEnUnaComision() {
+        // Aquí deberías agregar una comisión a la universidad, inscribir a un alumno en esa comisión y registrar una nota para ese alumno
+    	String nombreAlumno = "Martin", apellidoAlumno = "Zaccardo";
+		Integer dni = 123;
+		Alumno alumno = new Alumno(nombreAlumno, apellidoAlumno, dni);
+		Universidad unlam = new Universidad();
+		
+		Boolean alumnoAgregado = unlam.agregarAlumno(alumno);
+
+        Double nota = Comision.obtenerNota(alumno);
+
+        // Aquí deberías verificar que la nota obtenida es correcta
+    }
+
+    @Test
+    public void queSePuedaVerificarSiUnAlumnoAproboUnaComision() {
+        // Aquí deberías agregar una comisión a la universidad, inscribir a un alumno en esa comisión y registrar una nota para ese alumno
+
+        Boolean alumnoAprobo = Comision.alumnoAprobo(alumno);
+
+        // Aquí deberías verificar si el alumno aprobó o no
+    }
+
 }
 

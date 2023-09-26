@@ -18,8 +18,9 @@ public class Comision {
 	    this.turno = turno;
 	    alumnos = new ArrayList<>();
 	    profesores = new ArrayList<>();
-	    new ArrayList<>();
+	    examenes = new ArrayList<>(); // Inicializas la lista de exámenes
 	}
+
 
 	
 	public Integer getId() {
