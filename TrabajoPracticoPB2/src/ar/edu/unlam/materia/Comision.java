@@ -10,6 +10,7 @@ public class Comision {
 	private CicloLectivo cicloLectivo;
 	private Materia materia;
 	private Turno turno;
+	private ArrayList<Examen> examenes;
 	public Comision (Integer id, CicloLectivo cicloLectivo, Materia materia, Turno turno) {
 	    this.id = id;
 	    this.cicloLectivo = cicloLectivo;
@@ -77,13 +78,12 @@ public class Comision {
     }
     
     public ArrayList<Examen> getExamenes() {
-		return examenes; // Getter para la lista de exámenes
-	}
+        return examenes;
+    }
 
-	public void setExamenes(ArrayList<Examen> examenes) {
-		this.examenes = examenes; // Setter para la lista de exámenes
-	}
-}
+    public void setExamenes(ArrayList<Examen> examenes) {
+        this.examenes = examenes;
+    }
     
     public Double obtenerNota(Alumno alumno) {
         for (Examen examen : examenes) {
