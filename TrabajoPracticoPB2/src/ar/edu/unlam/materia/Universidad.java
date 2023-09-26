@@ -78,18 +78,17 @@ public class Universidad {
 	}
 
 	public Boolean agregarComision(Comision comision) {
-        if (!comisiones.contains(comision)) { // Verificamos que la comisión no esté ya en la lista de comisiones
+        if (!comisiones.contains(comision)) {
             for (Comision com : comisiones) {
                 if (com.getMateria().equals(comision.getMateria())
                         && com.getCicloLectivo().equals(comision.getCicloLectivo())
                         && com.getTurno().equals(comision.getTurno())) {
-                    return false; // Si ya existe una comisión con la misma materia, ciclo lectivo y turno,
-                                  // devolvemos false
+                    return false; 
                 }
             }
-            return comisiones.add(comision); // Si no existe, agregamos la comisión
+            return comisiones.add(comision);
         }
-        return false; // Si la comisión ya está en la lista de comisiones, devolvemos false
+        return false; 
     }
 
 	public Comision buscarComision(Integer idComision) {
@@ -227,7 +226,7 @@ public class Universidad {
 
 	public ArrayList<Materia> obtenerMateriasFaltantesParaUnAlumno(Integer dni) {
         Alumno alumno = buscarAlumno(dni);
-        ArrayList<Materia> materiasFaltantes = new ArrayList<>(materias); // Inicialmente, asumimos que el alumno no ha cursado ninguna materia
+        ArrayList<Materia> materiasFaltantes = new ArrayList<>(materias);
 
         if (alumno != null) {
             for (Comision comision : comisiones) {
@@ -259,7 +258,6 @@ public class Universidad {
 	        }
 	    }
 
-	    // Si el alumno tiene notas, calculamos el promedio. Si no, devolvemos -1.0.
 	    return cantidadNotas > 0 ? sumaNotas / cantidadNotas : null; 
 	}
 
