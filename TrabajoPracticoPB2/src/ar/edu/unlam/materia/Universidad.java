@@ -258,5 +258,20 @@ public class Universidad {
 
 	    return cantidadNotas > 0 ? sumaNotas / cantidadNotas : null; 
 	}
+	
+	public boolean estaAprobado(Integer dni, Integer idMateria) {
+	    Alumno alumno = buscarAlumno(dni);
+	    Materia materia = buscarMateria(idMateria);
+
+	    if (alumno != null && materia != null) {
+	        for (Comision comision : comisiones) {
+	            if (comision.getAlumnos().contains(alumno) && comision.getMateria().equals(materia)) {
+	                Double nota = comision.obtenerNota(alumno);
+	                return nota != null && nota >= 4.0;
+	            }
+	        }
+	    }
+	    return false;
+	}
 
 }
