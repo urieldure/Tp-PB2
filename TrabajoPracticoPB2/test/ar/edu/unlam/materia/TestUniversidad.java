@@ -417,28 +417,33 @@ public class TestUniversidad {
     
     @Test
     public void queSePuedaObtenerUnaNota() {
-    	Universidad unlam = new Universidad();
-    	
-    	String nombreAlumno = "Martin", apellidoAlumno = "Zaccardo";
-		Integer dni = 123;
-		Alumno alumno = new Alumno(nombreAlumno, apellidoAlumno, dni);
-		
-		unlam.agregarAlumno(alumno);
-		
-		Integer id = 123;
-		CicloLectivo actual = new CicloLectivo(56, LocalDate.parse("2023-03-01"), LocalDate.parse("2023-07-01"), LocalDate.parse("2023-02-01"));
-		Materia materia = new Materia("PB2", 456); 
-		Turno turno = Turno.MAÑANA;
-		Comision comision = new Comision(id, actual, materia, turno);
-		
-		unlam.agregarComision(comision);
-		
-		Examen examen = new Examen(alumno, 10.0);
-		
-		Boolean notaRegistrada = unlam.registrarNota(id, dni, examen.getNota());
-		
-		assertTrue(notaRegistrada);
+
+        Universidad unlam = new Universidad();
+
+        String nombreAlumno = "Martin", apellidoAlumno = "Zaccardo";
+        Integer dni = 123;
+        Alumno alumno = new Alumno(nombreAlumno, apellidoAlumno, dni);
+        unlam.agregarAlumno(alumno);
+
+        Integer id = 123;
+        CicloLectivo actual = new CicloLectivo(56, LocalDate.parse("2023-03-01"), LocalDate.parse("2023-07-01"), LocalDate.parse("2023-02-01"));
+        Materia materia = new Materia("PB2", 456); 
+        Turno turno = Turno.MAÑANA;
+        Comision comision = new Comision(id, actual, materia, turno);
+        unlam.agregarComision(comision);
+
+        unlam.inscribirAlumnoAComision(dni, id);
+
+        Double notaEsperada = 10.0;
+        Boolean notaRegistrada = unlam.registrarNota(id, dni, notaEsperada);
+        
+        assertTrue(notaRegistrada);
+
+        Double notaObtenida = comision.obtenerNota(alumno);
+
+        assertEquals(notaEsperada, notaObtenida);
     }
+
     
     @Test
     public void queSePuedanObtenerLasMateriasFaltantesParaUnAlumno() {

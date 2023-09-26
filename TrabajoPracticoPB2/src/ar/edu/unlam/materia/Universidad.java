@@ -166,9 +166,7 @@ public class Universidad {
 			if (!estaAprobado(dni, correlativa.getId()))
 				return false;
 		}
-		
 		return true;
-
 	}
 
 
@@ -210,18 +208,18 @@ public class Universidad {
     }
 
 	public Double obtenerNota(Integer dni, Integer idMateria) {
-		Alumno alumno = buscarAlumno(dni);
-		Materia materia = buscarMateria(idMateria);
+	    Alumno alumno = buscarAlumno(dni);
+	    Materia materia = buscarMateria(idMateria);
 
-		if (alumno != null && materia != null) {
-			for (Comision comision : comisiones) {
-				if (comision.getAlumnos().contains(alumno) && comision.getMateria().equals(materia)) {
-					// Aquí deberías retornar la nota del alumno en esta comisión
-					// return comision.obtenerNota(alumno);
-				}
-			}
-		}
-		return null;
+	    if (alumno != null && materia != null) {
+	        for (Comision comision : comisiones) {
+	            if (comision.getAlumnos().contains(alumno) && comision.getMateria().equals(materia)) {
+	                // Aquí deberías retornar la nota del alumno en esta comisión
+	                return comision.obtenerNota(alumno);
+	            }
+	        }
+	    }
+	    return null;
 	}
 
 	public ArrayList<Materia> obtenerMateriasFaltantesParaUnAlumno(Integer dni) {
