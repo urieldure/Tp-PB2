@@ -38,10 +38,10 @@ public class Materia {
 		this.correlativas = correlativas;
 	}
 
-	public Boolean asignarCorrelativa(Materia correlativa) {
+	public void asignarCorrelativa(Materia correlativa) {
         if (!this.correlativas.contains(correlativa)) { // Verificamos que la correlativa no esté ya asignada a la materia
-            return this.correlativas.add(correlativa);
+        	this.correlativas.add(correlativa);
         }
-        return false; // Si la correlativa ya está asignada a la materia, devolvemos false
+        // Si la correlativa ya está asignada a la materia, devolvemos false
     }
 }

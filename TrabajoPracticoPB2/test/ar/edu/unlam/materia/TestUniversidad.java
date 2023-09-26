@@ -289,6 +289,38 @@ public class TestUniversidad {
     }
     
     @Test
+    public void queNoSePuedaInscribirAUnAlumnoAUnaMateriaSiNoTieneCorrelativasAprobadas() {
+    	Universidad unlam = new Universidad ();
+    	
+    	String nombreMateria = "PB1";
+        Integer codigo = 1;
+        Materia pb1 = new Materia (nombreMateria, codigo);
+        
+        unlam.agregarMateria(pb1);
+        
+        String nombreMateria2 = "PB2";
+        Integer codigo2 = 2;
+        ArrayList<Materia> correlativas = new ArrayList<>();
+        correlativas.add(pb1);
+        Materia pb2 = new Materia (nombreMateria2, codigo2);
+        
+        pb2.asignarCorrelativa(pb1);
+        unlam.agregarMateria(pb2);
+        
+        String nombreAlumno = "Martin";
+    	String apellidoAlumno = "Zaccardo";
+    	Integer dni= 12345; 
+        Alumno alumno = new Alumno (nombreAlumno,apellidoAlumno, dni);
+     
+    	unlam.agregarAlumno(alumno);
+    	
+    	unlam.inscribirAlumnoAUnaMateria(dni,1);
+   
+    	assertFalse(unlam.inscribirAlumnoAUnaMateria(dni,2)) ;
+       
+    }
+    
+    @Test
     public void queSePuedaAsignarAUnProfesorAUnaComision() {
     	Universidad unlam = new Universidad();
     	
@@ -339,6 +371,31 @@ public class TestUniversidad {
         assertTrue(notaRegistrada);
     }
 
+    
+    @Test
+    public void queSePuedaObtenerUnaNota() {
+    	Universidad unlam = new Universidad();
+    	
+    	String nombreAlumno = "Martin", apellidoAlumno = "Zaccardo";
+		Integer dni = 123;
+		Alumno alumno = new Alumno(nombreAlumno, apellidoAlumno, dni);
+		
+		unlam.agregarAlumno(alumno);
+		
+		Integer id = 123;
+		CicloLectivo actual = new CicloLectivo(56, LocalDate.parse("2023-03-01"), LocalDate.parse("2023-07-01"), LocalDate.parse("2023-02-01"));
+		Materia materia = new Materia("PB2", 456); 
+		Turno turno = Turno.MAÑANA;
+		Comision comision = new Comision(id, actual, materia, turno);
+		
+		unlam.agregarComision(comision);
+		
+		Examen examen = new Examen(alumno, 10.0);
+		
+		Boolean notaRegistrada = unlam.registrarNota(id, dni, examen.getNota());
+		
+		assertTrue(notaRegistrada);
+    }
     
     @Test
     public void queSePuedanObtenerLasMateriasFaltantesParaUnAlumno() {
