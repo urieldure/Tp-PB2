@@ -216,6 +216,7 @@ public class Universidad {
 			for (Comision comision : comisiones) {
 				if (comision.getAlumnos().contains(alumno) && comision.getMateria().equals(materia)) {
 					// Aquí deberías retornar la nota del alumno en esta comisión
+					return comision.obtenerNota(alumno);
 					// return comision.obtenerNota(alumno);
 				}
 			}
@@ -259,7 +260,8 @@ public class Universidad {
 			}
 		}
 
-		return cantidadNotas > 0 ? sumaNotas / cantidadNotas : null; // Si el alumno tiene notas, calculamos el
+		Double promedio = sumaNotas / cantidadNotas;
+		return promedio; // Si el alumno tiene notas, calculamos el
 																		// promedio. Si no, devolvemos null.
 	}
 }

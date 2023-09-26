@@ -11,6 +11,8 @@ public class Comision {
 	private Materia materia;
 	private Turno turno;
 	private ArrayList<Examen> examenes;
+	private ArrayList <Aula> aulas;
+	
 	public Comision (Integer id, CicloLectivo cicloLectivo, Materia materia, Turno turno) {
 	    this.id = id;
 	    this.cicloLectivo = cicloLectivo;
@@ -19,6 +21,7 @@ public class Comision {
 	    alumnos = new ArrayList<>();
 	    profesores = new ArrayList<>();
 	    examenes = new ArrayList<>(); // Inicializas la lista de exámenes
+	    aulas = new ArrayList<>();
 	}
 
 
@@ -103,6 +106,14 @@ public class Comision {
         }
         return false; // Si el alumno no ha dado ningún examen, devolvemos false
     }
+
+
+	public Boolean asignarAula(Aula aula) {
+		if (!this.aulas.contains(aula)) {
+			return aulas.add(aula);
+		}
+		return false;
+	}
 
 
 }
