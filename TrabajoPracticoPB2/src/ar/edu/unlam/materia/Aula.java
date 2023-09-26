@@ -30,11 +30,20 @@ public class Aula {
         this.alumnosEnAula = alumnosEnAula; // Setter para la lista de alumnos en el aula
     }
 
-	public Integer getCapacidadMaxima() {
-        return capacidadMaxima - this.alumnosEnAula.size(); // Devolvemos la capacidad máxima menos la cantidad de alumnos actualmente en el aula
+    public Integer getCapacidadRestante() {
+        return capacidadMaxima - this.alumnosEnAula.size();
     }
 
     public void setCapacidadMaxima(Integer capacidadMaxima) {
         this.capacidadMaxima = capacidadMaxima; 
     }
+    
+    public void agregarAlumno(Alumno alumno) {
+        if (this.alumnosEnAula.size() < this.capacidadMaxima) {
+            this.alumnosEnAula.add(alumno);
+        } else {
+            System.out.println("El aula está llena. No se puede agregar al alumno: " + alumno);
+        }
+    }
+
 }

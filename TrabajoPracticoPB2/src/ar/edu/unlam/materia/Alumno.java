@@ -68,4 +68,9 @@ public class Alumno {
 	public int getEdad() {
         return Period.between(this.fechaDeNacimiento, LocalDate.now()).getYears();
     }
+	
+	@Override
+    public String toString() {
+        return "Alumno [nombre=" + nombre + ", apellido=" + apellido + ", dni=" + dni + "]";
+    }
 }

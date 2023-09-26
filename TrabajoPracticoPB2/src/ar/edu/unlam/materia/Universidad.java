@@ -78,16 +78,19 @@ public class Universidad {
 	}
 
 	public Boolean agregarComision(Comision comision) {
-		for (Comision com : comisiones) {
-			if (com.getMateria().equals(comision.getMateria())
-					&& com.getCicloLectivo().equals(comision.getCicloLectivo())
-					&& com.getTurno().equals(comision.getTurno())) {
-				return false; // Si ya existe una comisión con la misma materia, ciclo lectivo y turno,
-								// devolvemos false
-			}
-		}
-		return comisiones.add(comision); // Si no existe, agregamos la comisión
-	}
+        if (!comisiones.contains(comision)) { // Verificamos que la comisión no esté ya en la lista de comisiones
+            for (Comision com : comisiones) {
+                if (com.getMateria().equals(comision.getMateria())
+                        && com.getCicloLectivo().equals(comision.getCicloLectivo())
+                        && com.getTurno().equals(comision.getTurno())) {
+                    return false; // Si ya existe una comisión con la misma materia, ciclo lectivo y turno,
+                                  // devolvemos false
+                }
+            }
+            return comisiones.add(comision); // Si no existe, agregamos la comisión
+        }
+        return false; // Si la comisión ya está en la lista de comisiones, devolvemos false
+    }
 
 	public Comision buscarComision(Integer idComision) {
 		for (Comision comision : comisiones) {
@@ -192,21 +195,20 @@ public class Universidad {
 	}
 
 	public ArrayList<Materia> obtenerMateriasAprobadasParaUnAlumno(Integer dni) {
-		Alumno alumno = buscarAlumno(dni);
-		ArrayList<Materia> materiasAprobadas = new ArrayList<>();
+        Alumno alumno = buscarAlumno(dni);
+        ArrayList<Materia> materiasAprobadas = new ArrayList<>();
 
-		if (alumno != null) {
-			for (Comision comision : comisiones) {
-				if (comision.getAlumnos().contains(alumno)) {
-					// Aquí deberías verificar si el alumno aprobó la materia en esta comisión
-					// if (comision.alumnoAprobo(alumno)) {
-					// materiasAprobadas.add(comision.getMateria());
-					// }
-				}
-			}
-		}
-		return materiasAprobadas;
-	}
+        if (alumno != null) {
+            for (Comision comision : comisiones) {
+                if (comision.getAlumnos().contains(alumno)) {
+                    if (comision.alumnoAprobo(alumno)) {
+                        materiasAprobadas.add(comision.getMateria());
+                    }
+                }
+            }
+        }
+        return materiasAprobadas;
+    }
 
 	public Double obtenerNota(Integer dni, Integer idMateria) {
 		Alumno alumno = buscarAlumno(dni);
@@ -224,42 +226,41 @@ public class Universidad {
 	}
 
 	public ArrayList<Materia> obtenerMateriasFaltantesParaUnAlumno(Integer dni) {
-		Alumno alumno = buscarAlumno(dni);
-		ArrayList<Materia> materiasFaltantes = new ArrayList<>(materias); // Inicialmente, asumimos que el alumno no ha
-																			// cursado ninguna materia
+        Alumno alumno = buscarAlumno(dni);
+        ArrayList<Materia> materiasFaltantes = new ArrayList<>(materias); // Inicialmente, asumimos que el alumno no ha cursado ninguna materia
 
-		if (alumno != null) {
-			for (Comision comision : comisiones) {
-				if (comision.getAlumnos().contains(alumno)) {
-					// Aquí deberías verificar si el alumno aprobó la materia en esta comisión
-					// if (comision.alumnoAprobo(alumno)) {
-					// materiasFaltantes.remove(comision.getMateria());
-					// }
-				}
-			}
-		}
-		return materiasFaltantes;
-	}
+        if (alumno != null) {
+            for (Comision comision : comisiones) {
+                if (comision.getAlumnos().contains(alumno)) {
+                    if (comision.alumnoAprobo(alumno)) {
+                        materiasFaltantes.remove(comision.getMateria());
+                    }
+                }
+            }
+        }
+        return materiasFaltantes;
+    }
 
 	public Double calcularPromedio(Integer dni) {
-		Alumno alumno = buscarAlumno(dni);
-		Double sumaNotas = 0.0;
-		Integer cantidadNotas = 0;
+	    Alumno alumno = buscarAlumno(dni);
+	    Double sumaNotas = 0.0;
+	    Integer cantidadNotas = 0;
 
-		if (alumno != null) {
-			for (Comision comision : comisiones) {
-				if (comision.getAlumnos().contains(alumno)) {
-					for (Examen examen : comision.getExamenes()) {
-						if (examen.getAlumno().equals(alumno)) {
-							sumaNotas += examen.getNota();
-							cantidadNotas++;
-						}
-					}
-				}
-			}
-		}
+	    if (alumno != null) {
+	        for (Comision comision : comisiones) {
+	            if (comision.getAlumnos().contains(alumno)) {
+	                for (Examen examen : comision.getExamenes()) {
+	                    if (examen.getAlumno().equals(alumno)) {
+	                        sumaNotas += examen.getNota();
+	                        cantidadNotas++;
+	                    }
+	                }
+	            }
+	        }
+	    }
 
-		return cantidadNotas > 0 ? sumaNotas / cantidadNotas : null; // Si el alumno tiene notas, calculamos el
-																		// promedio. Si no, devolvemos null.
+	    // Si el alumno tiene notas, calculamos el promedio. Si no, devolvemos -1.0.
+	    return cantidadNotas > 0 ? sumaNotas / cantidadNotas : null; 
 	}
+
 }
