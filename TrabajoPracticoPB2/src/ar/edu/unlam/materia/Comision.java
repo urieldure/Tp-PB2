@@ -77,10 +77,31 @@ public class Comision {
     }
     
     public ArrayList<Examen> getExamenes() {
-        return getExamenes(); // Getter para la lista de exámenes
+		return examenes; // Getter para la lista de exámenes
+	}
+
+	public void setExamenes(ArrayList<Examen> examenes) {
+		this.examenes = examenes; // Setter para la lista de exámenes
+	}
+}
+    
+    public Double obtenerNota(Alumno alumno) {
+        for (Examen examen : examenes) {
+            if (examen.getAlumno().equals(alumno)) {
+                return examen.getNota(); // Devolvemos la nota del examen
+            }
+        }
+        return null; // Si el alumno no ha dado ningún examen, devolvemos null
     }
 
-    public void setExamenes(ArrayList<Examen> examenes) {
+    public Boolean alumnoAprobo(Alumno alumno) {
+        for (Examen examen : examenes) {
+            if (examen.getAlumno().equals(alumno)) {
+                return examen.getNota() >= 4.0; // Asumimos que una nota de 4.0 o más es una aprobación
+            }
+        }
+        return false; // Si el alumno no ha dado ningún examen, devolvemos false
     }
+
 
 }

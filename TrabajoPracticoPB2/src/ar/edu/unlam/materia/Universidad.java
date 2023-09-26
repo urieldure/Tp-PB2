@@ -176,15 +176,16 @@ public class Universidad {
         if (alumno != null) {
             for (Comision comision : comisiones) {
                 if (comision.getAlumnos().contains(alumno)) {
-                    // Aquí deberías verificar si el alumno aprobó la materia en esta comisión
-                    // if (comision.alumnoAprobo(alumno)) {
-                    //     materiasAprobadas.add(comision.getMateria());
-                    // }
+                    if (comision.alumnoAprobo(alumno)) { // Verificamos si el alumno aprobó la materia en esta comisión
+                        materiasAprobadas.add(comision.getMateria());
+                    }
                 }
             }
         }
         return materiasAprobadas;
     }
+
+
 
     public Double obtenerNota(Integer dni, Integer idMateria) {
         Alumno alumno = buscarAlumno(dni);
@@ -193,13 +194,13 @@ public class Universidad {
         if (alumno != null && materia != null) {
             for (Comision comision : comisiones) {
                 if (comision.getAlumnos().contains(alumno) && comision.getMateria().equals(materia)) {
-                    // Aquí deberías retornar la nota del alumno en esta comisión
-                    // return comision.obtenerNota(alumno);
+                    return comision.obtenerNota(alumno); // Obtenemos la nota del alumno en esta comisión
                 }
             }
         }
         return null;
     }
+
     
     public ArrayList<Materia> obtenerMateriasFaltantesParaUnAlumno(Integer dni) {
         Alumno alumno = buscarAlumno(dni);
@@ -208,15 +209,15 @@ public class Universidad {
         if (alumno != null) {
             for (Comision comision : comisiones) {
                 if (comision.getAlumnos().contains(alumno)) {
-                    // Aquí deberías verificar si el alumno aprobó la materia en esta comisión
-                    // if (comision.alumnoAprobo(alumno)) {
-                    //     materiasFaltantes.remove(comision.getMateria());
-                    // }
+                    if (comision.alumnoAprobo(alumno)) { // Verificamos si el alumno aprobó la materia en esta comisión
+                        materiasFaltantes.remove(comision.getMateria());
+                    }
                 }
             }
         }
         return materiasFaltantes;
     }
+
 
     public Double calcularPromedio(Integer dni) {
         Alumno alumno = buscarAlumno(dni);
@@ -235,7 +236,6 @@ public class Universidad {
                 }
             }
         }
-
         return cantidadNotas > 0 ? sumaNotas / cantidadNotas : null; // Si el alumno tiene notas, calculamos el promedio. Si no, devolvemos null.
     }
 }
